@@ -20,16 +20,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data_mhs as $mhs)
+                        @forelse ($data_mhs as $mhs)
                             <tr>
-                                <td class="text-center align-middle">{{ $mhs['nim'] }}</td>
-                                <td class="align-middle">{{ $mhs['nama'] }}</td>
-                                <td class="align-middle">{{ $mhs['prodi'] }}</td>
+                                <td class="text-center align-middle">{{ $mhs->nim }}</td>
+                                <td class="align-middle">{{ $mhs->nama }}</td>
+                                <td class="align-middle">{{ $mhs->prodi }}</td>
                                 <td class="text-center">
                                     <button class="btn btn-sm btn-info text-white">Detail</button>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center text-muted py-4">Belum ada data mahasiswa.</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

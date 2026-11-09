@@ -17,11 +17,14 @@ Route::get('/', function () {
 // Route::prefix('admin')->group(fn () => Route::get('/dashboard', fn () => "Dashboard Admin"));
 
 // Bab 3 — route ke controller
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-// Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
-Route::resource('mahasiswa', MahasiswaController::class);
-Route::get('/dosen', [DosenController::class, 'index'])->name('dosen.index');
-Route::get('/matakuliah', [MatakuliahController::class, 'index'])->name('matakuliah.index');
-Route::get('/kelas', function () {
-    return view('kelas');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('mahasiswa', MahasiswaController::class);
+    Route::get('/dosen', [DosenController::class, 'index'])->name('dosen.index');
+    Route::get('/matakuliah', [MatakuliahController::class, 'index'])->name('matakuliah.index');
+    Route::get('/kelas', function () {
+        return view('kelas');
+    });
 });
+
+require __DIR__.'/auth.php';

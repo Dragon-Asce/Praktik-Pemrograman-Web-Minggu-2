@@ -18,7 +18,8 @@ Route::get('/', function () {
 
 // Bab 3 — route ke controller
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
+// Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
+Route::resource('mahasiswa', MahasiswaController::class);
 Route::get('/dosen', [DosenController::class, 'index'])->name('dosen.index');
 Route::get('/matakuliah', [MatakuliahController::class, 'index'])->name('matakuliah.index');
 Route::get('/kelas', function () {

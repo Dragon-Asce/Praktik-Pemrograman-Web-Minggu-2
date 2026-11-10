@@ -1,8 +1,0 @@
-$kind: http-request
-description: ""
-url: http://127.0.0.1:8000/api/mahasiswaAPI
-method: GET
-headers:
-  Accept: application/json
-  Authorization: Bearer 14|WrC6PiyrAdSirTNVVEHpaPC3dmv3Abf81bruoHL1cc19be0f
-order: 3000

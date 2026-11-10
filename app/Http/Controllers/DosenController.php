@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 
 class DosenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $data_dosen = Dosen::orderBy('nidn')->get();
@@ -17,51 +14,54 @@ class DosenController extends Controller
         return view('dosen.index', compact('data_dosen'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('dosen.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nidn' => 'required|unique:dosens,nidn',
+            'nama' => 'required|min:3',
+            'bidang_keahlian' => 'required',
+        ]);
+
+        Dosen::create($request->only(['nidn', 'nama', 'bidang_keahlian']));
+
+        return redirect()->route('dosen.index')
+            ->with('success', 'Data dosen berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Dosen $dosen)
     {
-        //
+        return view('dosen.show', compact('dosen'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Dosen $dosen)
     {
-        //
+        return view('dosen.edit', compact('dosen'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Dosen $dosen)
     {
-        //
+        $request->validate([
+            'nidn' => 'required|unique:dosens,nidn,' . $dosen->id,
+            'nama' => 'required|min:3',
+            'bidang_keahlian' => 'required',
+        ]);
+
+        $dosen->update($request->only(['nidn', 'nama', 'bidang_keahlian']));
+
+        return redirect()->route('dosen.index')
+            ->with('success', 'Data dosen berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Dosen $dosen)
     {
-        //
+        $dosen->delete();
+
+        return redirect()->route('dosen.index')
+            ->with('success', 'Data dosen berhasil dihapus.');
     }
 }

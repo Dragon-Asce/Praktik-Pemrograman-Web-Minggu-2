@@ -20,8 +20,8 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('mahasiswa', MahasiswaController::class);
-    Route::get('/dosen', [DosenController::class, 'index'])->name('dosen.index');
-    Route::get('/matakuliah', [MatakuliahController::class, 'index'])->name('matakuliah.index');
+    Route::resource('dosen', DosenController::class);
+    Route::resource('matakuliah', MatakuliahController::class);
     Route::get('/kelas', function () {
         return view('kelas');
     });

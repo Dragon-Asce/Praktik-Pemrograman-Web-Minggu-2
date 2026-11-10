@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Matakuliah;
 use Illuminate\Http\Request;
 
 class MatakuliahController extends Controller
@@ -11,7 +12,9 @@ class MatakuliahController extends Controller
      */
     public function index()
     {
-        return view('matakuliah.index');
+        $data_matakuliah = Matakuliah::orderBy('kode_mk')->get();
+
+        return view('matakuliah.index', compact('data_matakuliah'));
     }
 
     /**

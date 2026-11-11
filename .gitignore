@@ -29,3 +29,6 @@ Thumbs.db
 # Postman — koleksi lokal, tidak ikut repo
 /postman
 /.postman
+
+AGENTS.md
+CLAUDE.md

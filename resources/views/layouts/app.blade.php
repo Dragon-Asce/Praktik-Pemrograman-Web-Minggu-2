@@ -12,7 +12,25 @@
     <nav class="navbar navbar-dark bg-primary shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="{{ url('/') }}">🎓 SIAKAD</a>
-            <span class="navbar-text text-white-50 small">Politeknik Manufaktur Bandung</span>
+
+            <div class="d-flex align-items-center gap-3">
+                <span class="navbar-text text-white-50 small d-none d-md-inline">
+                    Politeknik Manufaktur Bandung
+                </span>
+
+                @auth
+                    <span class="navbar-text text-white small">
+                        {{ auth()->user()->name }}
+                    </span>
+
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-outline-light">
+                            Logout
+                        </button>
+                    </form>
+                @endauth
+            </div>
         </div>
     </nav>
 
